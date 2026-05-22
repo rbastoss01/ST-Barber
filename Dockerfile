@@ -4,7 +4,7 @@ RUN apt-get update && apt-get install -y \
     curl \
     unzip \
     && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
     && apt-get install -y nodejs
 
 RUN install-php-extensions \
@@ -28,4 +28,4 @@ RUN npm install && npm run build
 
 EXPOSE 80
 
-CMD ["sh", "-c", "php artisan migrate --force && php artisan db:seed --force && frankenphp run --config /etc/caddy/Caddyfile"]
+CMD php artisan migrate --force && php artisan db:seed --force && frankenphp run --config /etc/caddy/Caddyfile
